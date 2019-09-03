@@ -47,4 +47,4 @@ def wp2cyjs(identifier):
 
     cyelements["nodes"] = cynodes
     cyelements["edges"] = cyedges
-    return elements
+    return cyelements
