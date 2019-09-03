@@ -38,9 +38,9 @@ def wp2cyjs(identifier):
     for wpe in wpedges:
         data = {}
         for point in wpe.find_all('Point'):
-            if point.has_key('GraphRef'):
+            if point.has_attr('GraphRef'):
                 data['source'] = point['GraphRef']
-            if point.has_key('ArrowHead'):
+            if point.has_attr('ArrowHead'):
                 data['target'] = point['GraphRef']
             cyedge = {"data":data}
             cyedges.append(cyedge)
