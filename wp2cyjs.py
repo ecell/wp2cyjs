@@ -33,7 +33,7 @@ def wp2cyjs(identifier):
         data['height'] = g['Height']
 
         cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
-        cynodes.append(node)
+        cynodes.append(cynode)
 
     for wpe in wpedges:
         data = {}
