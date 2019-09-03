@@ -36,11 +36,14 @@ def wp2cyjs(identifier):
         cynodes.append(cynode)
 
     for wpe in wpedges:
-        data = {}
-        data['source'] = wpe.find_all('Point')[0]['GraphRef']
-        data['target'] = wpe.find_all('Point')[1]['GraphRef']
-        cyedge = {"data":data}
-        cyedges.append(cyedge)
+        try:
+            data = {}
+            data['source'] = wpe.find_all('Point')[0]['GraphRef']
+            data['target'] = wpe.find_all('Point')[1]['GraphRef']
+            cyedge = {"data":data}
+            cyedges.append(cyedge)
+        except:
+            print(wpe)
 
     cyelements["nodes"] = cynodes
     cyelements["edges"] = cyedges
