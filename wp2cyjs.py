@@ -27,12 +27,12 @@ def wp2cyjs(identifier):
         data = {}
         data['id'] = wpn['GraphId']
         data['label'] = wpn['TextLabel']
-        data['x'] = int(g['CenterX'])
-        data['y'] = int(g['CenterY'])
+        data['x'] = float(g['CenterX'])
+        data['y'] = float(g['CenterY'])
         data['width'] = g['Width']
         data['height'] = g['Height']
 
-        cynode = {"data":data, "position":{"x":int(g["CenterX"]), "y":int(g["CenterY"])}, "selected":"false"}
+        cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
         cynodes.append(node)
 
     for wpe in wpedges:
