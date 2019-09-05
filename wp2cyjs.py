@@ -22,18 +22,18 @@ def wp2cyelements(identifier):
     cyedges = []
 
     for wpn in wpnodes:
-        if wpn['Type'] == "Metabolite":
-            g = wpn.find('Graphics')
-            data = {}
-            data['id'] = wpn['GraphId']
-            data['label'] = wpn['TextLabel']
-            data['x'] = float(g['CenterX'])
-            data['y'] = float(g['CenterY'])
-            data['width'] = g['Width']
-            data['height'] = g['Height']
+#        if wpn['Type'] == "Metabolite":
+        g = wpn.find('Graphics')
+        data = {}
+        data['id'] = wpn['GraphId']
+        data['label'] = wpn['TextLabel']
+        data['x'] = float(g['CenterX'])
+        data['y'] = float(g['CenterY'])
+        data['width'] = g['Width']
+        data['height'] = g['Height']
 
-            cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
-            cynodes.append(cynode)
+        cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
+        cynodes.append(cynode)
 
     for wpe in wpedges:
         data = {}
