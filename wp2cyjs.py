@@ -57,7 +57,7 @@ def cynodes2df(cynodes):
 
 def cyelements2cyjs(cyelements, filename):
     d = {}
-    d["elements"] = cyjs
+    d["elements"] = cyelements
     print(json.dumps(d, indent=4), file=open(filename,'w'))
     print("save cyelements as " + filename)
     
