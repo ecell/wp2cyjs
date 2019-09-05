@@ -1,7 +1,6 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-
 import pandas as pd
 
 __author__ = 'Kozo Nishida'
@@ -49,3 +48,9 @@ def wp2cyjs(identifier):
     cyelements["nodes"] = cynodes
     cyelements["edges"] = cyedges
     return cyelements
+
+def cynodes2df(cynodes):
+    rows = []
+    for cynode in cynodes:
+        rows.append(pd.Series(cynode['data']))
+    return pd.DataFrame(rows)
