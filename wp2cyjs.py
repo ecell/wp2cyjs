@@ -54,3 +54,10 @@ def cynodes2df(cynodes):
     for cynode in cynodes:
         rows.append(pd.Series(cynode['data']))
     return pd.DataFrame(rows)
+
+def cyelements2cyjs(cyelements, filename):
+    d = {}
+    d["elements"] = cyjs
+    print(json.dumps(d, indent=4), file=open(filename,'w'))
+    print("save cyelements as " + filename)
+    
