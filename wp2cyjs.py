@@ -20,17 +20,19 @@ def wp2cyelements(identifier):
     cyelements = {}
     cynodes = []
     cyedges = []
+    nodeids = []
 
     for wpn in wpnodes:
-#        if wpn['Type'] == "Metabolite":
-        g = wpn.find('Graphics')
-        data = {}
-        data['id'] = wpn['GraphId']
-        data['label'] = wpn['TextLabel']
-        data['x'] = float(g['CenterX'])
-        data['y'] = float(g['CenterY'])
-        data['width'] = g['Width']
-        data['height'] = g['Height']
+        if wpn['Type'] == "Metabolite":
+            g = wpn.find('Graphics')
+            data = {}
+            data['id'] = wpn['GraphId']
+            nodeids.append(wpn['GraphId'])
+            data['label'] = wpn['TextLabel']
+            data['x'] = float(g['CenterX'])
+            data['y'] = float(g['CenterY'])
+            data['width'] = g['Width']
+            data['height'] = g['Height']
 
         cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
         cynodes.append(cynode)
@@ -41,7 +43,8 @@ def wp2cyelements(identifier):
             if point.has_attr('GraphRef') and point.has_attr('ArrowHead'):
                 data['target'] = point['GraphRef']
             elif point.has_attr('GraphRef'):
-                data['source'] = point['GraphRef']
+                if point['GraphRef'] in nodeids:
+                    data['source'] = point['GraphRef']
         cyedge = {"data":data}
         cyedges.append(cyedge)
 
