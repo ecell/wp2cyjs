@@ -45,7 +45,7 @@ def wp2cyelements(identifier):
             elif point.has_attr('GraphRef'):
                 if point['GraphRef'] in nodeids:
                     data['source'] = point['GraphRef']
-        if data.has_key('source') and data.has_key('target'):
+        if 'source' in data.keys() and 'target' in data.keys():
             cyedge = {"data":data}
             cyedges.append(cyedge)
 
