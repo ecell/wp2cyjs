@@ -10,7 +10,7 @@ __license__ = 'MIT'
 
 API_BASE = 'https://webservice.wikipathways.org/'
 
-def wp2cyjs(identifier):
+def wp2cyelements(identifier):
     gpml = requests.get(API_BASE + 'getPathway?pwId=' + identifier + '&format=json').content
     soup = BeautifulSoup(json.loads(gpml)['pathway']['gpml'], "xml")
     
