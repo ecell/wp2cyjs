@@ -2,6 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import bridgedbpy
 
 __author__ = 'Kozo Nishida'
 __email__ = 'knishida@riken.jp'
@@ -25,6 +26,7 @@ def wp2cyelements(identifier):
     for wpn in wpnodes:
         if wpn['Type'] == "Metabolite":
             g = wpn.find('Graphics')
+            
             data = {}
             data['id'] = wpn['GraphId']
             nodeids.append(wpn['GraphId'])
@@ -34,6 +36,13 @@ def wp2cyelements(identifier):
             data['width'] = g['Width']
             data['height'] = g['Height']
 
+            xref = wpn.find('Xref')
+            if xref is not None:
+                data['database'] = xref['Database']
+                data['xrefID'] = xref['ID']
+                print(data['id'], data['label'], data['database'], data['xrefID'])
+                data['KEGG'] = bridgedbpy.gpml2kegg(xref['Database'], xref['ID'])
+
         cynode = {"data":data, "position":{"x":float(g["CenterX"]), "y":float(g["CenterY"])}, "selected":"false"}
         cynodes.append(cynode)
 
@@ -41,7 +50,8 @@ def wp2cyelements(identifier):
         data = {}
         for point in wpe.find_all('Point'):
             if point.has_attr('GraphRef') and point.has_attr('ArrowHead'):
-                data['target'] = point['GraphRef']
+                if point['GraphRef'] in nodeids:
+                    data['target'] = point['GraphRef']
             elif point.has_attr('GraphRef'):
                 if point['GraphRef'] in nodeids:
                     data['source'] = point['GraphRef']
